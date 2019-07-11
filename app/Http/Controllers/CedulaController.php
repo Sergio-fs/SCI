@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Cedula;
 use Carbon\Carbon;
 use Codedge\Fpdf\Facades\Fpdf;
+//use Imagick;
 //use Setasign\Tfpdf\Facades\Tfpdf;
 use App\Http\Requests\CedulaRequest;
 
@@ -19,8 +20,10 @@ class CedulaController extends Controller
     public function index()
     {
 
-        $cedulas = Cedula::whereRaw('extract(month from fechaRep) = ?', [Carbon::now()->month])->paginate(15);
-        return view('fichas.cedulas.index', ['cedulas' => $cedulas]);
+        $cedulas = Cedula::whereRaw('extract(month from fechaRep) = ?', [Carbon::now()->month])->paginate(30);
+        $conteoMensual =  $cedulas->count();
+        $conteoDiario =  Cedula::whereRaw('extract(day from fechaRep) = ?', [Carbon::now()->day])->count();
+        return view('fichas.cedulas.index', ['cedulas' => $cedulas, 'conteoDiario' => $conteoDiario, 'conteoMensual' => $conteoMensual]);
     }
 
     /**
@@ -75,7 +78,8 @@ class CedulaController extends Controller
      */
     public function show($id)
     {
-        
+        $cedula = Cedula::find($id);
+        return view('fichas.cedulas.show', ['cedula' => $cedula]);
     }
 
     /**
@@ -86,7 +90,8 @@ class CedulaController extends Controller
      */
     public function edit($id)
     {
-        return view('fichas.cedulas.edit', compact('user'));
+        $cedula = Cedula::find($id);
+        return view('fichas.cedulas.edit', ['cedula' => $cedula]);
     }
 
     /**
@@ -96,9 +101,11 @@ class CedulaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CedulaRequest $request, $id)
     {
-        //
+        $cedula = Cedula::find($id);
+        $cedula->fill ($request->all())->save();
+        return redirect()->route('cedula.show', $id);
     }
 
     /**
@@ -132,7 +139,7 @@ class CedulaController extends Controller
         Fpdf::Text(180, 9.7, utf8_decode (ucwords(date("d/m/Y", strtotime($cedula->fechaDes)))));
         Fpdf::Text(180, 13.5, utf8_decode ($cedula->numeroCed));
         Fpdf::SetFont('Arial','B',17);
-        Fpdf::Text(87.5, 23, utf8_decode (ucwords($cedula->nombres)." ".ucwords($cedula->apellidoPat)." ".ucwords($cedula->apellidoMat)));
+        Fpdf::Text(87.5, 23, utf8_decode (ucwords($cedula->nombres." ".$cedula->apellidoPat." ".$cedula->apellidoMat)));
         Fpdf::SetFont('Arial','B',8);
         Fpdf::Text(84, 29, utf8_decode(ucwords($cedula->edad)." años"));
         Fpdf::Text(115, 29, ucwords($cedula->estatura)." m");
@@ -151,6 +158,10 @@ class CedulaController extends Controller
         Fpdf::MultiCell(126,2.6,utf8_decode($cedula->ultimoAvi),0,2,'');
         Fpdf::Output('F', $pathFile);
         $headers = ['Content-Type' => 'application/pdf'];
+        //Lee PDF pendiente a instalar expencion imagik
+        //Imagick::readImage(storage_path(). '/recipe.pdf');
+        // Escribe imagen
+        //return Imagick::writeImages('converted_page_one.jpg');
         return response()->file($pathFile, $headers);
     }
 }
