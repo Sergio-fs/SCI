@@ -39,11 +39,11 @@
                         </div>
                         <div class="col">
                           <label class="col-form-label">{{ __('Fecha del reporte ') }}</label>
-                          <input type="text" name="fechaRep" class="form-control" value="{{$cedula->fechaRep}}" >
+                          <input type="date" name="fechaRep" class="form-control" value="{{$cedula->fechaRep}}" >
                           <label class="col-form-label">{{ __('Fecha de desaparición') }}</label>
-                          <input type="text" name="fechaDes" class="form-control" value="{{$cedula->fechaDes}}" >
+                          <input type="date" name="fechaDes" class="form-control" value="{{$cedula->fechaDes}}" >
                           <label class="col-form-label">{{ __('Numero de cedula') }}</label>
-                          <input type="text" name="numeroCed" class="form-control"value="{{$cedula->numeroCed}}">
+                          <input type="date" name="numeroCed" class="form-control"value="{{$cedula->numeroCed}}">
                         </div>
                       </div>
                     </div> 

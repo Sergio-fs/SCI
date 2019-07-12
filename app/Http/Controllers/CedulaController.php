@@ -105,7 +105,7 @@ class CedulaController extends Controller
     {
         $cedula = Cedula::find($id);
         $cedula->fill ($request->all())->save();
-        return redirect()->route('cedula.show', $id);
+        return redirect()->route('cedula.show', $id)->withStatus(__('Cedula actualizada correctamente'));
     }
 
     /**
