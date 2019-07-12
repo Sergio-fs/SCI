@@ -17,6 +17,7 @@
             <p>{{ __('Principal') }}</p>
         </a>
       </li>
+      @if(Auth::check() && Auth::user()->hasRole('admin'))
       <li class="nav-item {{ ($activePage == 'profile' || $activePage == 'user-management') ? ' active' : '' }}">
         <a class="nav-link" data-toggle="collapse" href="#Usuarios" aria-expanded="true">
           <i><img style="width:25px" src="{{ asset('material') }}/img/laravel.svg"></i>
@@ -41,6 +42,7 @@
           </ul>
         </div>
       </li>
+      @endif
       <li class="nav-item {{ ($activePage == 'Cedulas' || $activePage == 'pre-ambar' || $activePage == 'ambar' || $activePage == 'alba' ) ? ' active' : '' }}">
         <a class="nav-link" data-toggle="collapse" href="#Fichas" aria-expanded="true">
           <i><img style="width:25px" src="{{ asset('material') }}/img/laravel.svg"></i>

@@ -29,7 +29,7 @@
                 <i class="material-icons">store</i>
               </div>
               <p class="card-category">Localizadas {{ \Carbon\Carbon::now()->format('M') }} </p>
-              <h3 class="card-title">$34,245</h3>
+              <h3 class="card-title">0</h3>
             </div>
             <div class="card-footer">
               <div class="stats">
@@ -44,7 +44,7 @@
               <div class="card-icon">
                 <i class="material-icons">info_outline</i>
               </div>
-              <p class="card-category">Registradas</p>
+              <p class="card-category">Registradas hoy</p>
               <h3 class="card-title">{{$conteoDiario}}</h3>
             </div>
             <div class="card-footer">
@@ -60,7 +60,7 @@
               <div class="card-icon">
                 <i class="fa fa-twitter"></i>
               </div>
-              <p class="card-category">Localizadas</p>
+              <p class="card-category">Localizadas hoy</p>
               <h3 class="card-title">+245</h3>
             </div>
             <div class="card-footer">
