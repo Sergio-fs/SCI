@@ -5,7 +5,6 @@
  */
 
 require('./bootstrap');
-
 window.Vue = require('vue');
 
 /**
@@ -19,7 +18,12 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('image-input-component', require('./components/ImageInputComponent.vue').default);
+Vue.component('select-region-component', require('./components/MultiSelectRegion.vue').default);
+Vue.component('select-municipio-component', require('./components/MultiSelectMunicipio.vue').default);
+Vue.component('option-municipio-region', require('./components/SelectRegionComponent.vue').default);
+
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

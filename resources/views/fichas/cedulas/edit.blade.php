@@ -1,7 +1,7 @@
 @extends('layouts.app', ['activePage' => 'Cedulas', 'titlePage' => __('Manejo de cedulas')])
 
 @section('content')
-  <div class="content">
+  <div class="content" id="app">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
@@ -12,6 +12,36 @@
               <div class="card-header card-header-primary">
                 <h4 class="card-title">{{ __('Vista de edición') }}</h4>
                 <p class="card-category"></p>
+              </div>
+              <div class="card">
+                <div class="card-header card-header-icon card-header">
+                  <div class="card-icon">
+                    <i class="material-icons">perm_identity</i>
+                  </div>
+                  <h4 class="card-title"> Datos del reporte 
+                  </h4>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-sm">
+                          <label class="col-form-label">{{ __('Fecha del reporte ') }}</label>
+                          <input type="date" name="fechaRep" class="form-control" value="{{$cedula->fechaRep}}" >
+                        </div>
+                        <div class="col-sm">
+                          <label class="col-form-label">{{ __('Fecha de desaparición') }}</label>
+                          <input type="date" name="fechaDes" class="form-control" value="{{$cedula->fechaDes}}">
+                        </div>
+                        <div class="col-sm">
+                          <label class="col-form-label">{{ __('Numero de cedula') }}</label>
+                          <input type="text" name="numeroCed" class="form-control" value="{{$cedula->numeroCed}}">
+                        </div>
+                      </div>
+                      <option-municipio-region></option-municipio-region>
+                    </div> 
+                  </div>
+                </div>
               </div>  
               <div class="card">
                 <div class="card-header card-header-icon card-header">
@@ -27,23 +57,23 @@
                     <div class="container">
                       <div class="row">
                         <div class="col">
-                          <img src="{{ asset('images') }}/{{$cedula->nombreArch}}" alt="..." width="200">
+                          <image-input-component name="foto" id="input-foto"></image-input-component>
                         </div>
                         <div class="col">
                           <label class="col-form-label">{{ __('Nombre ') }}</label>
                           <input type="text" name="nombres" class="form-control" value="{{$cedula->nombres}}" >
                           <label class="col-form-label">{{ __('Apellido paterno') }}</label>
-                          <input type="text" name="apellidoPat" class="form-control" value="{{$cedula->apellidoPat}}" >
+                          <input type="text" name="apellidoPat" class="form-control" value="{{$cedula->apellidoPat}}">
                           <label class="col-form-label">{{ __('Apellido materno') }}</label>
-                          <input type="text" name="apellidoMat" class="form-control"value="{{$cedula->apellidoMat}}">
+                          <input type="text" name="apellidoMat" class="form-control" value="{{$cedula->apellidoMat}}">
                         </div>
                         <div class="col">
-                          <label class="col-form-label">{{ __('Fecha del reporte ') }}</label>
-                          <input type="date" name="fechaRep" class="form-control" value="{{$cedula->fechaRep}}" >
-                          <label class="col-form-label">{{ __('Fecha de desaparición') }}</label>
-                          <input type="date" name="fechaDes" class="form-control" value="{{$cedula->fechaDes}}" >
-                          <label class="col-form-label">{{ __('Numero de cedula') }}</label>
-                          <input type="date" name="numeroCed" class="form-control"value="{{$cedula->numeroCed}}">
+                          <label class="col-form-label">{{ __('Edad ') }}</label>
+                          <input type="number" name="edad" class="form-control" value="{{$cedula->edad}}" >
+                          <label class="col-form-label">{{ __('Estatura') }}</label>
+                          <input type="number" name="estatura" class="form-control" value="{{$cedula->edtatura}}"  >
+                          <label class="col-form-label">{{ __('Peso') }}</label>
+                          <input type="number" name="peso" class="form-control" value="{{$cedula->peso}}">
                         </div>
                       </div>
                     </div> 

@@ -1,16 +1,16 @@
 @extends('layouts.app', ['activePage' => 'Cedulas', 'titlePage' => __('Manejo de cedulas')])
 
 @section('content')
-  <div class="content">
+  <div class="content" id="app">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
           <div class="card">
-            <form method="post" action="{{ route('cedula.store') }}" autocomplete="off" class="form-horizontal" id="usrform" enctype="multipart/form-data">
+            <form method="post" action="{{ route('cedula.store') }}"  class="form-horizontal" id="usrform" enctype="multipart/form-data">
               @csrf
               @method('post')
               <div class="card-header card-header-primary">
-                <h4 class="card-title">{{ __('Vista de edición') }}</h4>
+                <h4 class="card-title">{{ __('Registrar nueva cedula') }}</h4>
                 <p class="card-category"></p>
               </div>
               <div class="card">
@@ -35,9 +35,10 @@
                         </div>
                         <div class="col-sm">
                           <label class="col-form-label">{{ __('Numero de cedula') }}</label>
-                          <input type="number" name="numeroCed" class="form-control">
+                          <input type="text" name="numeroCed" class="form-control">
                         </div>
                       </div>
+                      <option-municipio-region></option-municipio-region>
                     </div> 
                   </div>
                 </div>
@@ -56,7 +57,7 @@
                     <div class="container">
                       <div class="row">
                         <div class="col">
-                          <input class="form-control" name="foto" id="input-foto" type="file" required="true" aria-required="true"/>
+                          <image-input-component name="foto" id="input-foto"></image-input-component>
                         </div>
                         <div class="col">
                           <label class="col-form-label">{{ __('Nombre ') }}</label>
@@ -104,7 +105,6 @@
                 </div>
                 <div class="card-footer ml-auto mr-auto">
                 <button class="btn btn-success">Guardar</button>
-                
               </div>
               </div>
             </form>

@@ -28,9 +28,16 @@ class CreateCedulasTable extends Migration
             $table->longText('señasPar');
             $table->longText('ultimoAvi');
             $table->string('nombreArch');
-            $table->longText('numeroCed');
+            $table->longText('numeroCed')->unique();
+            $table->bigInteger('municipio_id')->unsigned()->nullable();
+            $table->bigInteger('region_id')->unsigned()->nullable();
+            $table->boolean('localizada');
             $table->timestamps();
+            $table->softDeletes();
+            $table->foreign('region_id')->references('id')->on('regiones');
+            $table->foreign('municipio_id')->references('id')->on('municipios');
         });
+
     }
 
     /**

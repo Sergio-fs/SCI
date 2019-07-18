@@ -132,17 +132,17 @@
                                   @csrf
                                   @method('delete')
                                   <a rel="tooltip" class="btn btn-primary btn-link" href="{{ route('cedula.show', $cedula->id) }}" data-original-title="" title="" >
-                                    <i class="material-icons">edit</i>
+                                    <i class="material-icons">open_in_browser</i>
+                                    <div class="ripple-container"></div>
+                                  </a>
+                                  <a rel="tooltip" class="btn btn-primary btn-link" href="{{ route('cedula.pdf', $cedula->id) }}" data-original-title="" title="" target="_blank">
+                                    <i class="material-icons">picture_as_pdf</i>
                                     <div class="ripple-container"></div>
                                   </a>
                                   <button type="button" class="btn btn-danger btn-link" data-original-title="" title="" onclick="confirm('{{ __("Confirmar para borrar registro") }}') ? this.parentElement.submit() : ''">
                                       <i class="material-icons">close</i>
                                       <div class="ripple-container"></div>
                                   </button>
-                                  <a rel="tooltip" class="btn btn-primary btn-link" href="{{ route('cedula.pdf', $cedula->id) }}" data-original-title="" title="" target="_blank">
-                                    <i class="material-icons">edit</i>
-                                    <div class="ripple-container"></div>
-                                  </a>
                               </form>
                           </td>
                         </tr>

@@ -49,23 +49,28 @@ class CedulaController extends Controller
         //$request->merge(['archivo' => strval($imageName)]);
         //return $request; 
         //Cedula::create($request->all());
-
-        Cedula::create([
-            'fechaDes' => $request->get('fechaDes'),
-            'fechaRep' => $request->get('fechaRep'),
-            'edad' => $request->get('edad'),
-            'estatura' => $request->get('estatura'),
-            'peso' => $request->get('peso'),
-            'apellidoPat' => $request->get('apellidoPat'),
-            'apellidoMat' => $request->get('apellidoMat'),
-            'nombres' => $request->get('nombres'),
-            'mediaFil' => $request->get('mediaFil'),
-            'vestimenta' => $request->get('vestimenta'),
-            'señasPar' => $request->get('señasPar'),
-            'ultimoAvi' => $request->get('ultimoAvi'),
-            'numeroCed' => $request->get('numeroCed'),
-            'nombreArch' => $imageName
-            ]);
+        $cedula = new Cedula;
+        $cedula->fechaDes = $request->get('fechaDes');
+        $cedula->fechaRep = $request->get('fechaRep');
+        $cedula->edad = $request->get('edad');
+        $cedula->estatura = $request->get('estatura');
+        $cedula->peso = $request->get('peso');
+        $cedula->apellidoPat = $request->get('apellidoPat');
+        $cedula->apellidoMat = $request->get('apellidoMat');
+        $cedula->nombres = $request->get('nombres');
+        $cedula->mediaFil = $request->get('mediaFil');
+        $cedula->vestimenta = $request->get('vestimenta');
+        $cedula->señasPar = $request->get('señasPar');
+        $cedula->ultimoAvi = $request->get('ultimoAvi');
+        $cedula->numeroCed = $request->get('numeroCed');
+        $cedula->nombreArch = $imageName;
+        $cedula->municipio_id = $request->get('municipio');     
+        if ($cedula->municipio_id != null) {
+            $cedula->region_id = $cedula->municipio->region_id;
+        }else{
+            $cedula->region_id = $request->get('region');
+        }
+        $cedula->save();
         request()->foto->move(public_path('images'), $imageName);
         return redirect()->route('cedula.index')->withStatus(__('Cedula registrada correctamente'));
     }
@@ -118,6 +123,19 @@ class CedulaController extends Controller
     {
         $cedula = Cedula::find($id);
         $cedula->delete();
+        return redirect()->route('cedula.index')->withStatus(__('Ceduña eliminada correctamente'));
+    }
+
+    /**
+     * Marcar cedula como localizada.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function localizar($id)
+    {
+        $cedula = Cedula::find($id);
+        $cedula->localizada = true;
         return redirect()->route('cedula.index')->withStatus(__('Ceduña eliminada correctamente'));
     }
 

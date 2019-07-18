@@ -2,6 +2,7 @@
 /public/hot
 /public/storage
 /storage/*.key
+/storage/recipe.pdf
 /vendor
 .env
 .phpunit.result.cache

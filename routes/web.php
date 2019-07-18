@@ -59,6 +59,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('user', 'UserController', ['except' => ['show']]);
 	Route::resource('cedula', 'CedulaController');
 	//Route::get('/cedpdf/{id}', 'CedulaController@pdf');
+	Route::get('GetMunicipios', 'ServiceController@GetMunicipios');
+	Route::get('GetRegiones', 'ServiceController@GetRegiones');
 	Route::get('cedpdf/{id}', ['as' => 'cedula.pdf', 'uses' => 'CedulaController@pdf']);
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
